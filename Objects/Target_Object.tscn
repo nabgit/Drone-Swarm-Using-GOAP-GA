@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dtgqvyth3474k"]
 
-[ext_resource type="Texture2D" uid="uid://gbpyiea3wme4" path="res://icon.svg" id="1_r6br0"]
+[ext_resource type="Texture2D" uid="uid://b40x31dl3fa2i" path="res://Assets/icon-tree.png" id="1_d02yx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r6br0"]
 size = Vector2(109, 106)
@@ -8,9 +8,10 @@ size = Vector2(109, 106)
 [node name="TargetObject" type="Node2D" unique_id=1159901913]
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=617195242]
-texture = ExtResource("1_r6br0")
+texture = ExtResource("1_d02yx")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=803190421]
+collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1162846499]
 position = Vector2(1.5, 2)

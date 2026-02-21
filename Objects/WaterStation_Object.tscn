@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://ddnbn1s56dc8s"]
+
+[ext_resource type="Texture2D" uid="uid://b4raktwhr2qw6" path="res://Assets/icon-Water_Station.png" id="1_bjumv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r6br0"]
+size = Vector2(109, 106)
+
+[node name="WaterStation_Object" type="Node2D" unique_id=1159901913]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=617195242]
+texture = ExtResource("1_bjumv")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=803190421]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1162846499]
+position = Vector2(1.5, 2)
+shape = SubResource("RectangleShape2D_r6br0")

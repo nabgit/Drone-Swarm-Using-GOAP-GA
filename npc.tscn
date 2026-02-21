@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cf72clw3qfxwo"]
 
-[ext_resource type="Texture2D" uid="uid://gbpyiea3wme4" path="res://icon.svg" id="1_ideak"]
+[ext_resource type="Texture2D" uid="uid://gbpyiea3wme4" path="res://Assets/icon.svg" id="1_ideak"]
 [ext_resource type="Script" uid="uid://fex6c6hiva21" path="res://npc.gd" id="1_xxcha"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xxcha"]
@@ -13,13 +13,10 @@ script = ExtResource("1_xxcha")
 texture = ExtResource("1_ideak")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1733985420]
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=196184090]
 position = Vector2(1.5, 2)
 shape = SubResource("RectangleShape2D_xxcha")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1446482821]
-position = Vector2(1.5, 2)
-shape = SubResource("RectangleShape2D_xxcha")
-
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
