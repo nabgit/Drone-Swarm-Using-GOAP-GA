@@ -1,0 +1,316 @@
+[gd_scene format=3 uid="uid://dtrostftslvwn"]
+
+[ext_resource type="PackedScene" uid="uid://cf72clw3qfxwo" path="res://npc.tscn" id="1_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://dtgqvyth3474k" path="res://Target_Object.tscn" id="2_h2yge"]
+
+[node name="Main" type="Node2D" unique_id=1322690549]
+
+[node name="NPC" parent="." unique_id=1483093568 instance=ExtResource("1_0xm2m")]
+z_index = 1
+position = Vector2(-992, -84)
+
+[node name="TargetObject" parent="." unique_id=1159901913 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(-840, 67)
+
+[node name="TargetObject2" parent="." unique_id=1897643849 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(-654, 69)
+
+[node name="TargetObject3" parent="." unique_id=1421212025 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(-465, 69)
+
+[node name="TargetObject4" parent="." unique_id=149217388 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(-837, 240)
+
+[node name="TargetObject5" parent="." unique_id=1097859243 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(-651, 234)
+
+[node name="TargetObject6" parent="." unique_id=285124816 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(-465, 231)
+
+[node name="TargetObject13" parent="." unique_id=1774405463 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(276, 64)
+
+[node name="TargetObject14" parent="." unique_id=1877224438 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(462, 66)
+
+[node name="TargetObject15" parent="." unique_id=1387325049 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(651, 66)
+
+[node name="TargetObject16" parent="." unique_id=492878100 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(279, 237)
+
+[node name="TargetObject17" parent="." unique_id=427355120 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(465, 231)
+
+[node name="TargetObject18" parent="." unique_id=154486034 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(651, 228)
+
+[node name="TargetObject7" parent="." unique_id=1691152873 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(-285, 64)
+
+[node name="TargetObject8" parent="." unique_id=196933188 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(-99, 66)
+
+[node name="TargetObject9" parent="." unique_id=434895236 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(90, 66)
+
+[node name="TargetObject10" parent="." unique_id=1351684446 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(-282, 237)
+
+[node name="TargetObject11" parent="." unique_id=577762836 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(-96, 231)
+
+[node name="TargetObject12" parent="." unique_id=259606684 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(90, 228)
+
+[node name="TargetObject19" parent="." unique_id=1880178758 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(840, 228)
+
+[node name="TargetObject20" parent="." unique_id=202373114 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(840, 66)
+
+[node name="TargetObject21" parent="." unique_id=621737085 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(-837, 403)
+
+[node name="TargetObject22" parent="." unique_id=635461608 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(-651, 405)
+
+[node name="TargetObject23" parent="." unique_id=828226860 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(-462, 405)
+
+[node name="TargetObject24" parent="." unique_id=716313868 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(-834, 576)
+
+[node name="TargetObject25" parent="." unique_id=831651910 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(-648, 570)
+
+[node name="TargetObject26" parent="." unique_id=180052346 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(-462, 567)
+
+[node name="TargetObject27" parent="." unique_id=253856039 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(279, 400)
+
+[node name="TargetObject28" parent="." unique_id=1591593915 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(465, 402)
+
+[node name="TargetObject29" parent="." unique_id=222606355 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(654, 402)
+
+[node name="TargetObject30" parent="." unique_id=1741750368 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(282, 573)
+
+[node name="TargetObject31" parent="." unique_id=873712090 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(468, 567)
+
+[node name="TargetObject32" parent="." unique_id=947395444 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(654, 564)
+
+[node name="TargetObject33" parent="." unique_id=1189147218 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(-282, 400)
+
+[node name="TargetObject34" parent="." unique_id=1871101971 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(-96, 402)
+
+[node name="TargetObject35" parent="." unique_id=1821085224 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(93, 402)
+
+[node name="TargetObject36" parent="." unique_id=460981542 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(-279, 573)
+
+[node name="TargetObject37" parent="." unique_id=1611180990 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(-93, 567)
+
+[node name="TargetObject38" parent="." unique_id=1130300331 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(93, 564)
+
+[node name="TargetObject39" parent="." unique_id=431671573 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(843, 564)
+
+[node name="TargetObject40" parent="." unique_id=1686518305 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(843, 402)
+
+[node name="TargetObject41" parent="." unique_id=984688919 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(-837, 736)
+
+[node name="TargetObject42" parent="." unique_id=347606961 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(-651, 738)
+
+[node name="TargetObject43" parent="." unique_id=275592707 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(-462, 738)
+
+[node name="TargetObject44" parent="." unique_id=1128060362 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(-834, 909)
+
+[node name="TargetObject45" parent="." unique_id=1856010095 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(-648, 903)
+
+[node name="TargetObject46" parent="." unique_id=1073083270 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(-462, 900)
+
+[node name="TargetObject47" parent="." unique_id=2004194113 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(279, 733)
+
+[node name="TargetObject48" parent="." unique_id=574583098 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(465, 735)
+
+[node name="TargetObject49" parent="." unique_id=1907997821 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(654, 735)
+
+[node name="TargetObject50" parent="." unique_id=482647730 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(282, 906)
+
+[node name="TargetObject51" parent="." unique_id=753119421 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(468, 900)
+
+[node name="TargetObject52" parent="." unique_id=1816065447 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(654, 897)
+
+[node name="TargetObject53" parent="." unique_id=2031741123 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(-282, 733)
+
+[node name="TargetObject54" parent="." unique_id=9239189 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(-96, 735)
+
+[node name="TargetObject55" parent="." unique_id=1435211174 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(93, 735)
+
+[node name="TargetObject56" parent="." unique_id=1164178841 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(-279, 906)
+
+[node name="TargetObject57" parent="." unique_id=211608710 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(-93, 900)
+
+[node name="TargetObject58" parent="." unique_id=1374519461 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(93, 897)
+
+[node name="TargetObject59" parent="." unique_id=509466697 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(843, 897)
+
+[node name="TargetObject60" parent="." unique_id=1670262827 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(843, 735)
+
+[node name="TargetObject61" parent="." unique_id=1987372562 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(-828, 1072)
+
+[node name="TargetObject62" parent="." unique_id=1849692422 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(-642, 1074)
+
+[node name="TargetObject63" parent="." unique_id=1091805014 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(-453, 1074)
+
+[node name="TargetObject64" parent="." unique_id=168856259 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(-825, 1245)
+
+[node name="TargetObject65" parent="." unique_id=395171022 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(-639, 1239)
+
+[node name="TargetObject66" parent="." unique_id=706719554 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(-453, 1236)
+
+[node name="TargetObject67" parent="." unique_id=1616944095 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(288, 1069)
+
+[node name="TargetObject68" parent="." unique_id=1672661566 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(474, 1071)
+
+[node name="TargetObject69" parent="." unique_id=761941023 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(663, 1071)
+
+[node name="TargetObject70" parent="." unique_id=223824136 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(291, 1242)
+
+[node name="TargetObject71" parent="." unique_id=1959962170 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(477, 1236)
+
+[node name="TargetObject72" parent="." unique_id=1718488412 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(663, 1233)
+
+[node name="TargetObject73" parent="." unique_id=1967678309 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(-273, 1069)
+
+[node name="TargetObject74" parent="." unique_id=727727641 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(-87, 1071)
+
+[node name="TargetObject75" parent="." unique_id=1097627358 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(102, 1071)
+
+[node name="TargetObject76" parent="." unique_id=1117585896 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(-270, 1242)
+
+[node name="TargetObject77" parent="." unique_id=319890702 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(-84, 1236)
+
+[node name="TargetObject78" parent="." unique_id=1444618202 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(102, 1233)
+
+[node name="TargetObject79" parent="." unique_id=1715958872 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(852, 1233)
+
+[node name="TargetObject80" parent="." unique_id=924504858 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(852, 1071)
+
+[node name="TargetObject81" parent="." unique_id=454183231 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(-828, 1402)
+
+[node name="TargetObject82" parent="." unique_id=635508719 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(-642, 1404)
+
+[node name="TargetObject83" parent="." unique_id=1595852711 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(-453, 1404)
+
+[node name="TargetObject84" parent="." unique_id=871604504 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(-825, 1575)
+
+[node name="TargetObject85" parent="." unique_id=2034362818 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(-639, 1569)
+
+[node name="TargetObject86" parent="." unique_id=1091793423 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(-453, 1566)
+
+[node name="TargetObject87" parent="." unique_id=301876609 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(288, 1399)
+
+[node name="TargetObject88" parent="." unique_id=257880400 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(474, 1401)
+
+[node name="TargetObject89" parent="." unique_id=1831536464 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(663, 1401)
+
+[node name="TargetObject90" parent="." unique_id=1325577127 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(291, 1572)
+
+[node name="TargetObject91" parent="." unique_id=1536627786 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(477, 1566)
+
+[node name="TargetObject92" parent="." unique_id=86095448 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(663, 1563)
+
+[node name="TargetObject93" parent="." unique_id=1707489886 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(-273, 1399)
+
+[node name="TargetObject94" parent="." unique_id=2057795350 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(-87, 1401)
+
+[node name="TargetObject95" parent="." unique_id=765059954 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(102, 1401)
+
+[node name="TargetObject96" parent="." unique_id=354503221 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(-270, 1572)
+
+[node name="TargetObject97" parent="." unique_id=1117146556 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(-84, 1566)
+
+[node name="TargetObject98" parent="." unique_id=2065347400 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(102, 1563)
+
+[node name="TargetObject99" parent="." unique_id=1490694796 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(852, 1563)
+
+[node name="TargetObject100" parent="." unique_id=2114431810 groups=["target_objects"] instance=ExtResource("2_h2yge")]
+position = Vector2(852, 1401)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1054948913]
+position = Vector2(2, 808)
+zoom = Vector2(0.3, 0.3)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera2D" unique_id=719591420]
