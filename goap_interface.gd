@@ -3,7 +3,7 @@ class_name GOAPInterface
 
 var weights: Dictionary = {}
 
-#{"extinguish_nearest": 10.0, "extinguish_oldest": 2.0}
+# {"extinguish_nearest": 10.0, "extinguish_oldest": 2.0}
 func _init(action_weights: Dictionary = {}):
 	weights = action_weights
 	
@@ -11,7 +11,7 @@ func get_burning_forests() -> Array:
 	var all_forests = get_tree().get_nodes_in_group("forest")
 	var burning = []
 	for f in all_forests:
-		if f.get("is_on_fire"): # Safe check for the property
+		if f.get("is_on_fire"): # Safety check for the property
 			burning.append(f)
 	return burning
 
@@ -32,14 +32,13 @@ func get_next_plan(npc_has_water: bool, npc_node: Node2D) -> Dictionary:
 	if npc_has_water:
 		var burning = get_burning_forests()
 		
-		# Add Fire Actions only if there are burning forests
 		if not burning.is_empty():
 			potential_actions.append({"action": "extinguish_nearest", "target": get_nearest_burning(npc_node)})
 			potential_actions.append({"action": "extinguish_newest", "target": burning[-1]})
 			potential_actions.append({"action": "extinguish_oldest", "target": burning[0]})
 		
 		# Add Drone Support
-		var drone = get_nearest_in_group(npc_node, "drones") # Assuming drones group exists
+		var drone = get_nearest_in_group(npc_node, "drones")
 		if drone and drone != npc_node: # Don't assist yourself
 			potential_actions.append({"action": "assist_drone", "target": drone})
 	else:
@@ -47,7 +46,6 @@ func get_next_plan(npc_has_water: bool, npc_node: Node2D) -> Dictionary:
 		potential_actions.append({"action": "refill_nearest", "target": get_nearest_in_group(npc_node, "water_station")})
 		potential_actions.append({"action": "refill_furthest", "target": get_furthest_in_group(npc_node, "water_station")})
 
-	# If no burning forests and no drones to assist, the NPC might have nothing to do
 	if potential_actions.is_empty():
 		return {}
 

@@ -1,6 +1,5 @@
 extends Node2D
 
-# EXPORT this so you can set Drone 1 to index 1, Drone 2 to index 2, etc. in the Inspector
 @export var npc_index: int = 1 
 @export var movement_speed: float = 200.0
 
@@ -23,19 +22,12 @@ var action_data = []
 ]
 
 var has_water = false
-@onready var goap: GOAPInterface
+var goap: GOAPInterface = null
 
-func _ready():
-	var default_weights = {
-		"extinguish_nearest": 1.0,
-		"extinguish_newest": 1.0,
-		"extinguish_oldest": 1.0,
-		"assist_drone": 1.0,
-		"refill_nearest": 1.0,
-		"refill_furthest": 1.0
-	}
+#func _ready():
 	
-	goap = GOAPInterface.new(default_weights)
+func initialize_goap(custom_weights: Dictionary):
+	goap = GOAPInterface.new(custom_weights)
 	add_child(goap)
 
 func start_simulation():
@@ -56,12 +48,14 @@ func _process(delta):
 				global_position += direction * movement_speed * delta
 			else:
 				global_position = current_target_object.global_position
-				# DO NOT null current_target_object here, 
-				# or _handle_action won't know who to talk to!
 				enter_state(State.PERFORM_ACTION)
 
 
 func enter_state(new_state):
+	if goap == null:
+		print("Drone ", npc_index, " waiting for GOAP initialization...")
+		return
+	
 	current_state = new_state
 	match current_state:
 		State.GO_TO_LOCATION:
@@ -70,7 +64,6 @@ func enter_state(new_state):
 			current_action_name = plan["action"]
 			action_data = plan["data"]
 			
-			# Use npc_index instead of hardcoded '1'
 			update_npc_status(npc_index, "Moving to: " + current_target_object.name)
 			
 		State.PERFORM_ACTION:
@@ -87,7 +80,6 @@ func _handle_action():
 	current_target_object = null
 
 	if success:
-		# Updated to match the specific action names returned by the new GOAP
 		if current_action_name.begins_with("extinguish") or current_action_name == "assist_drone":
 			has_water = false
 		elif current_action_name.begins_with("refill"):
@@ -97,7 +89,6 @@ func _handle_action():
 	enter_state(State.GO_TO_LOCATION)
 
 func update_npc_status(index, text):
-	# Safety check to ensure index is within the label array
 	if index > 0 and index <= npc_labels.size():
 		npc_labels[index-1].text = "Drone " + str(index) + ": " + text
 

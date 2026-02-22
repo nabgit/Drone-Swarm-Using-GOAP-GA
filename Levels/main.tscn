@@ -7,21 +7,21 @@
 
 [node name="Main" type="Node2D" unique_id=1322690549]
 
-[node name="NPC" parent="." unique_id=1483093568 instance=ExtResource("1_lwy2l")]
+[node name="NPC" parent="." unique_id=1483093568 groups=["drones"] instance=ExtResource("1_lwy2l")]
 z_index = 1
 position = Vector2(-992, -84)
 
-[node name="NPC2" parent="." unique_id=296780568 instance=ExtResource("1_lwy2l")]
+[node name="NPC2" parent="." unique_id=296780568 groups=["drones"] instance=ExtResource("1_lwy2l")]
 z_index = 1
 position = Vector2(975, -67)
 npc_index = 2
 
-[node name="NPC3" parent="." unique_id=1870210242 instance=ExtResource("1_lwy2l")]
+[node name="NPC3" parent="." unique_id=1870210242 groups=["drones"] instance=ExtResource("1_lwy2l")]
 z_index = 1
 position = Vector2(-963, 1690)
 npc_index = 3
 
-[node name="NPC4" parent="." unique_id=2055664616 instance=ExtResource("1_lwy2l")]
+[node name="NPC4" parent="." unique_id=2055664616 groups=["drones"] instance=ExtResource("1_lwy2l")]
 z_index = 1
 position = Vector2(1004, 1707)
 npc_index = 4

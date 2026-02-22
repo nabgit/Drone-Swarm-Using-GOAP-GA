@@ -1,6 +1,25 @@
 extends Node2D
 
-@export var is_on_fire: bool = false # Manually toggle in Inspector for testing
+@export var is_on_fire: bool = false:
+	set(value):
+		is_on_fire = value
+		update_sprite()
+
+var tree_tex = preload("res://Assets/icon-tree.png")
+var burning_tex = preload("res://Assets/icon-burning.png")
+
+@onready var sprite = $Sprite2D
+
+func _ready():
+	update_sprite()
+
+func update_sprite():
+	if not sprite: return # Safety check for initialization
+	
+	if is_on_fire:
+		sprite.texture = burning_tex
+	else:
+		sprite.texture = tree_tex
 
 func animate_smart_object(action_type: String, data: Array) -> bool:
 	print("Object ", name, " starting action: ", action_type, " with data: ", data)
@@ -9,7 +28,6 @@ func animate_smart_object(action_type: String, data: Array) -> bool:
 	
 	var success = true 
 	
-	# Logic: If we are extinguishing, put the fire out on success
 	if success and action_type.begins_with("extinguish"):
 		is_on_fire = false
 	
