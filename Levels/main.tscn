@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dtrostftslvwn"]
 
-[ext_resource type="PackedScene" uid="uid://cf72clw3qfxwo" path="res://npc.tscn" id="1_lwy2l"]
+[ext_resource type="PackedScene" uid="uid://cf72clw3qfxwo" path="res://Objects/npc.tscn" id="1_lwy2l"]
 [ext_resource type="PackedScene" uid="uid://dtgqvyth3474k" path="res://Objects/Target_Object.tscn" id="2_nj2yk"]
 [ext_resource type="PackedScene" uid="uid://ddnbn1s56dc8s" path="res://Objects/WaterStation_Object.tscn" id="3_7pswh"]
 [ext_resource type="Script" uid="uid://cg62cm04o2f60" path="res://game_manager.gd" id="4_nj2yk"]
