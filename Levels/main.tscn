@@ -61,15 +61,19 @@ position = Vector2(651, 228)
 
 [node name="TargetObject7" parent="." unique_id=1691152873 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(-285, 64)
+is_on_fire = true
 
 [node name="TargetObject8" parent="." unique_id=196933188 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(-99, 66)
+is_on_fire = true
 
 [node name="TargetObject9" parent="." unique_id=434895236 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(90, 66)
+is_on_fire = true
 
 [node name="TargetObject10" parent="." unique_id=1351684446 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(-282, 237)
+is_on_fire = true
 
 [node name="TargetObject11" parent="." unique_id=577762836 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(-96, 231)

@@ -23,9 +23,19 @@ var action_data = []
 ]
 
 var has_water = false
-@onready var goap = GOAPInterface.new()
+@onready var goap: GOAPInterface
 
 func _ready():
+	var default_weights = {
+		"extinguish_nearest": 1.0,
+		"extinguish_newest": 1.0,
+		"extinguish_oldest": 1.0,
+		"assist_drone": 1.0,
+		"refill_nearest": 1.0,
+		"refill_furthest": 1.0
+	}
+	
+	goap = GOAPInterface.new(default_weights)
 	add_child(goap)
 
 func start_simulation():
@@ -70,22 +80,18 @@ func enter_state(new_state):
 func _handle_action():
 	var target = current_target_object
 	if target == null:
-		print("ERROR: No target in PERFORM_ACTION")
 		enter_state(State.GO_TO_LOCATION)
 		return
 	
-	print("Calling smart object:", target.name)
-
 	var success = await target.animate_smart_object(current_action_name, action_data)
-
 	current_target_object = null
 
 	if success:
-		match current_action_name:
-			"water_plants":
-				has_water = false
-			"refill":
-				has_water = true
+		# Updated to match the specific action names returned by the new GOAP
+		if current_action_name.begins_with("extinguish") or current_action_name == "assist_drone":
+			has_water = false
+		elif current_action_name.begins_with("refill"):
+			has_water = true
 	
 	await get_tree().process_frame
 	enter_state(State.GO_TO_LOCATION)
