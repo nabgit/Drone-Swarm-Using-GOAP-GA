@@ -1,72 +1,99 @@
-extends CharacterBody2D
+extends Node2D
 
-@export var speed = 100.0
-@export var action_time = 2.0
-@export var npc_id = 1
+# EXPORT this so you can set Drone 1 to index 1, Drone 2 to index 2, etc. in the Inspector
+@export var npc_index: int = 1 
+@export var movement_speed: float = 200.0
 
-@onready var game_manager = get_tree().get_first_node_in_group("game_manager")
+enum State { GO_TO_LOCATION, PERFORM_ACTION }
+var current_state = State.GO_TO_LOCATION
 
-enum State { GO_TO_OBJECT, PERFORM_ACTION }
-var state = State.GO_TO_OBJECT
+var simulation_started = false
+var timer = 0
 
-var target = null
-var action_timer = 0.0
+var current_target_object = null
+var current_action_name = ""
+var action_data = []
+
+@onready var timer_label = $"../CanvasLayer_UI/Control/Label-Timer"
+@onready var npc_labels = [
+	$"../CanvasLayer_UI/Control/Label-NPC_Status",
+	$"../CanvasLayer_UI/Control/Label-NPC_Status2",
+	$"../CanvasLayer_UI/Control/Label-NPC_Status3",
+	$"../CanvasLayer_UI/Control/Label-NPC_Status4"
+]
+
+var has_water = false
+@onready var goap = GOAPInterface.new()
 
 func _ready():
-	target = find_closest_target()
+	add_child(goap)
 
-func update_status(text):
-	game_manager.update_npc_status(npc_id, text)
+func start_simulation():
+	simulation_started = true
+	enter_state(State.GO_TO_LOCATION)
 
-func _physics_process(delta):
-	if not game_manager.simulation_started:
-		return
-	
-	match state:
-		State.GO_TO_OBJECT:
-			go_to_object(delta)
+func _process(delta):
+	if simulation_started:
+		if npc_index == 1:
+			timer += delta
+			timer_label.text = "Time: " + str(int(timer))
+		
+		if current_state == State.GO_TO_LOCATION and current_target_object:
+			var distance = global_position.distance_to(current_target_object.global_position)
+			
+			if distance > 5.0:
+				var direction = global_position.direction_to(current_target_object.global_position)
+				global_position += direction * movement_speed * delta
+			else:
+				global_position = current_target_object.global_position
+				# DO NOT null current_target_object here, 
+				# or _handle_action won't know who to talk to!
+				enter_state(State.PERFORM_ACTION)
+
+
+func enter_state(new_state):
+	current_state = new_state
+	match current_state:
+		State.GO_TO_LOCATION:
+			var plan = goap.get_next_plan(has_water, self)
+			current_target_object = plan["target"]
+			current_action_name = plan["action"]
+			action_data = plan["data"]
+			
+			# Use npc_index instead of hardcoded '1'
+			update_npc_status(npc_index, "Moving to: " + current_target_object.name)
+			
 		State.PERFORM_ACTION:
-			perform_action(delta)
+			update_npc_status(npc_index, "Performing: " + current_action_name)
+			_handle_action()
 
-func find_closest_target():
-	var targets = get_tree().get_nodes_in_group("target_objects")
-	var closest = null
-	var closest_dist = INF
-
-	for t in targets:
-		var dist = global_position.distance_to(t.global_position)
-		if dist < closest_dist:
-			closest_dist = dist
-			closest = t
-
-	return closest
-
-func perform_action(delta):
-	update_status("DRONE %d: Performing action" % npc_id)
-	velocity = Vector2.ZERO
-	action_timer -= delta
-	
-	if action_timer <= 0:
-		state = State.GO_TO_OBJECT
-		target = null
-
-func go_to_object(delta):
-	update_status("DRONE %d: Going to target" % npc_id)
-	if target == null or not is_instance_valid(target):
-		target = find_closest_target()
+func _handle_action():
+	var target = current_target_object
+	if target == null:
+		print("ERROR: No target in PERFORM_ACTION")
+		enter_state(State.GO_TO_LOCATION)
 		return
+	
+	print("Calling smart object:", target.name)
 
-	# 1. Movement logic
-	var direction = (target.global_position - global_position).normalized()
-	velocity = direction * speed
-	move_and_slide()
+	var success = await target.animate_smart_object(current_action_name, action_data)
 
-	# 2. Manual proximity check (The "Collision" substitute)
-	# 15.0 is the 'arrival' radius in pixels
-	if global_position.distance_to(target.global_position) < 15.0:
-		start_action()
+	current_target_object = null
 
-func start_action():
-	state = State.PERFORM_ACTION
-	action_timer = action_time
-	print("Reached target! Switching state.")
+	if success:
+		match current_action_name:
+			"water_plants":
+				has_water = false
+			"refill":
+				has_water = true
+	
+	await get_tree().process_frame
+	enter_state(State.GO_TO_LOCATION)
+
+func update_npc_status(index, text):
+	# Safety check to ensure index is within the label array
+	if index > 0 and index <= npc_labels.size():
+		npc_labels[index-1].text = "Drone " + str(index) + ": " + text
+
+func _on_button_pressed() -> void:
+	start_simulation()

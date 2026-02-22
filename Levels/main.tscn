@@ -14,304 +14,304 @@ position = Vector2(-992, -84)
 [node name="NPC2" parent="." unique_id=296780568 instance=ExtResource("1_lwy2l")]
 z_index = 1
 position = Vector2(975, -67)
-npc_id = 2
+npc_index = 2
 
 [node name="NPC3" parent="." unique_id=1870210242 instance=ExtResource("1_lwy2l")]
 z_index = 1
 position = Vector2(-963, 1690)
-npc_id = 3
+npc_index = 3
 
 [node name="NPC4" parent="." unique_id=2055664616 instance=ExtResource("1_lwy2l")]
 z_index = 1
 position = Vector2(1004, 1707)
-npc_id = 4
+npc_index = 4
 
-[node name="TargetObject2" parent="." unique_id=1897643849 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject2" parent="." unique_id=1897643849 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(-654, 69)
 
-[node name="TargetObject3" parent="." unique_id=1421212025 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject3" parent="." unique_id=1421212025 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(-465, 69)
 
-[node name="TargetObject4" parent="." unique_id=149217388 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject4" parent="." unique_id=149217388 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(-837, 240)
 
-[node name="TargetObject5" parent="." unique_id=1097859243 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject5" parent="." unique_id=1097859243 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(-651, 234)
 
-[node name="TargetObject6" parent="." unique_id=285124816 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject6" parent="." unique_id=285124816 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(-465, 231)
 
-[node name="TargetObject13" parent="." unique_id=1774405463 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject13" parent="." unique_id=1774405463 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(276, 64)
 
-[node name="TargetObject14" parent="." unique_id=1877224438 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject14" parent="." unique_id=1877224438 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(462, 66)
 
-[node name="TargetObject15" parent="." unique_id=1387325049 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject15" parent="." unique_id=1387325049 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(651, 66)
 
-[node name="TargetObject16" parent="." unique_id=492878100 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject16" parent="." unique_id=492878100 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(279, 237)
 
-[node name="TargetObject17" parent="." unique_id=427355120 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject17" parent="." unique_id=427355120 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(465, 231)
 
-[node name="TargetObject18" parent="." unique_id=154486034 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject18" parent="." unique_id=154486034 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(651, 228)
 
-[node name="TargetObject7" parent="." unique_id=1691152873 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject7" parent="." unique_id=1691152873 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(-285, 64)
 
-[node name="TargetObject8" parent="." unique_id=196933188 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject8" parent="." unique_id=196933188 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(-99, 66)
 
-[node name="TargetObject9" parent="." unique_id=434895236 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject9" parent="." unique_id=434895236 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(90, 66)
 
-[node name="TargetObject10" parent="." unique_id=1351684446 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject10" parent="." unique_id=1351684446 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(-282, 237)
 
-[node name="TargetObject11" parent="." unique_id=577762836 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject11" parent="." unique_id=577762836 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(-96, 231)
 
-[node name="TargetObject12" parent="." unique_id=259606684 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject12" parent="." unique_id=259606684 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(90, 228)
 
-[node name="TargetObject19" parent="." unique_id=1880178758 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject19" parent="." unique_id=1880178758 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(840, 228)
 
-[node name="TargetObject21" parent="." unique_id=621737085 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject21" parent="." unique_id=621737085 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(-837, 403)
 
-[node name="TargetObject22" parent="." unique_id=635461608 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject22" parent="." unique_id=635461608 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(-651, 405)
 
-[node name="TargetObject23" parent="." unique_id=828226860 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject23" parent="." unique_id=828226860 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(-462, 405)
 
-[node name="TargetObject24" parent="." unique_id=716313868 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject24" parent="." unique_id=716313868 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(-834, 576)
 
-[node name="TargetObject25" parent="." unique_id=831651910 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject25" parent="." unique_id=831651910 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(-648, 570)
 
-[node name="TargetObject26" parent="." unique_id=180052346 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject26" parent="." unique_id=180052346 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(-462, 567)
 
-[node name="TargetObject27" parent="." unique_id=253856039 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject27" parent="." unique_id=253856039 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(279, 400)
 
-[node name="TargetObject28" parent="." unique_id=1591593915 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject28" parent="." unique_id=1591593915 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(465, 402)
 
-[node name="TargetObject29" parent="." unique_id=222606355 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject29" parent="." unique_id=222606355 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(654, 402)
 
-[node name="TargetObject30" parent="." unique_id=1741750368 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject30" parent="." unique_id=1741750368 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(282, 573)
 
-[node name="TargetObject31" parent="." unique_id=873712090 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject31" parent="." unique_id=873712090 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(468, 567)
 
-[node name="TargetObject32" parent="." unique_id=947395444 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject32" parent="." unique_id=947395444 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(654, 564)
 
-[node name="TargetObject33" parent="." unique_id=1189147218 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject33" parent="." unique_id=1189147218 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(-282, 400)
 
-[node name="TargetObject34" parent="." unique_id=1871101971 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject34" parent="." unique_id=1871101971 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(-96, 402)
 
-[node name="TargetObject35" parent="." unique_id=1821085224 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject35" parent="." unique_id=1821085224 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(93, 402)
 
-[node name="TargetObject36" parent="." unique_id=460981542 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject36" parent="." unique_id=460981542 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(-279, 573)
 
-[node name="TargetObject37" parent="." unique_id=1611180990 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject37" parent="." unique_id=1611180990 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(-93, 567)
 
-[node name="TargetObject38" parent="." unique_id=1130300331 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject38" parent="." unique_id=1130300331 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(93, 564)
 
-[node name="TargetObject39" parent="." unique_id=431671573 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject39" parent="." unique_id=431671573 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(843, 564)
 
-[node name="TargetObject40" parent="." unique_id=1686518305 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject40" parent="." unique_id=1686518305 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(843, 402)
 
-[node name="TargetObject41" parent="." unique_id=984688919 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject41" parent="." unique_id=984688919 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(-837, 736)
 
-[node name="TargetObject42" parent="." unique_id=347606961 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject42" parent="." unique_id=347606961 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(-651, 738)
 
-[node name="TargetObject43" parent="." unique_id=275592707 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject43" parent="." unique_id=275592707 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(-462, 738)
 
-[node name="TargetObject44" parent="." unique_id=1128060362 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject44" parent="." unique_id=1128060362 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(-834, 909)
 
-[node name="TargetObject45" parent="." unique_id=1856010095 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject45" parent="." unique_id=1856010095 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(-648, 903)
 
-[node name="TargetObject46" parent="." unique_id=1073083270 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject46" parent="." unique_id=1073083270 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(-462, 900)
 
-[node name="TargetObject47" parent="." unique_id=2004194113 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject47" parent="." unique_id=2004194113 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(279, 733)
 
-[node name="TargetObject48" parent="." unique_id=574583098 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject48" parent="." unique_id=574583098 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(465, 735)
 
-[node name="TargetObject49" parent="." unique_id=1907997821 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject49" parent="." unique_id=1907997821 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(654, 735)
 
-[node name="TargetObject50" parent="." unique_id=482647730 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject50" parent="." unique_id=482647730 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(282, 906)
 
-[node name="TargetObject51" parent="." unique_id=753119421 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject51" parent="." unique_id=753119421 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(468, 900)
 
-[node name="TargetObject52" parent="." unique_id=1816065447 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject52" parent="." unique_id=1816065447 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(654, 897)
 
-[node name="TargetObject53" parent="." unique_id=2031741123 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject53" parent="." unique_id=2031741123 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(-282, 733)
 
-[node name="TargetObject54" parent="." unique_id=9239189 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject54" parent="." unique_id=9239189 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(-96, 735)
 
-[node name="TargetObject55" parent="." unique_id=1435211174 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject55" parent="." unique_id=1435211174 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(93, 735)
 
-[node name="TargetObject56" parent="." unique_id=1164178841 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject56" parent="." unique_id=1164178841 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(-279, 906)
 
-[node name="TargetObject57" parent="." unique_id=211608710 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject57" parent="." unique_id=211608710 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(-93, 900)
 
-[node name="TargetObject58" parent="." unique_id=1374519461 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject58" parent="." unique_id=1374519461 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(93, 897)
 
-[node name="TargetObject59" parent="." unique_id=509466697 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject59" parent="." unique_id=509466697 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(843, 897)
 
-[node name="TargetObject60" parent="." unique_id=1670262827 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject60" parent="." unique_id=1670262827 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(843, 735)
 
-[node name="TargetObject61" parent="." unique_id=1987372562 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject61" parent="." unique_id=1987372562 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(-828, 1072)
 
-[node name="TargetObject62" parent="." unique_id=1849692422 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject62" parent="." unique_id=1849692422 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(-642, 1074)
 
-[node name="TargetObject63" parent="." unique_id=1091805014 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject63" parent="." unique_id=1091805014 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(-453, 1074)
 
-[node name="TargetObject64" parent="." unique_id=168856259 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject64" parent="." unique_id=168856259 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(-825, 1245)
 
-[node name="TargetObject65" parent="." unique_id=395171022 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject65" parent="." unique_id=395171022 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(-639, 1239)
 
-[node name="TargetObject66" parent="." unique_id=706719554 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject66" parent="." unique_id=706719554 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(-453, 1236)
 
-[node name="TargetObject67" parent="." unique_id=1616944095 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject67" parent="." unique_id=1616944095 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(288, 1069)
 
-[node name="TargetObject68" parent="." unique_id=1672661566 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject68" parent="." unique_id=1672661566 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(474, 1071)
 
-[node name="TargetObject69" parent="." unique_id=761941023 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject69" parent="." unique_id=761941023 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(663, 1071)
 
-[node name="TargetObject70" parent="." unique_id=223824136 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject70" parent="." unique_id=223824136 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(291, 1242)
 
-[node name="TargetObject71" parent="." unique_id=1959962170 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject71" parent="." unique_id=1959962170 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(477, 1236)
 
-[node name="TargetObject72" parent="." unique_id=1718488412 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject72" parent="." unique_id=1718488412 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(663, 1233)
 
-[node name="TargetObject73" parent="." unique_id=1967678309 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject73" parent="." unique_id=1967678309 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(-273, 1069)
 
-[node name="TargetObject74" parent="." unique_id=727727641 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject74" parent="." unique_id=727727641 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(-87, 1071)
 
-[node name="TargetObject75" parent="." unique_id=1097627358 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject75" parent="." unique_id=1097627358 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(102, 1071)
 
-[node name="TargetObject76" parent="." unique_id=1117585896 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject76" parent="." unique_id=1117585896 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(-270, 1242)
 
-[node name="TargetObject77" parent="." unique_id=319890702 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject77" parent="." unique_id=319890702 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(-84, 1236)
 
-[node name="TargetObject78" parent="." unique_id=1444618202 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject78" parent="." unique_id=1444618202 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(102, 1233)
 
-[node name="TargetObject79" parent="." unique_id=1715958872 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject79" parent="." unique_id=1715958872 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(852, 1233)
 
-[node name="TargetObject80" parent="." unique_id=924504858 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject80" parent="." unique_id=924504858 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(852, 1071)
 
-[node name="TargetObject81" parent="." unique_id=454183231 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject81" parent="." unique_id=454183231 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(-828, 1402)
 
-[node name="TargetObject82" parent="." unique_id=635508719 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject82" parent="." unique_id=635508719 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(-642, 1404)
 
-[node name="TargetObject83" parent="." unique_id=1595852711 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject83" parent="." unique_id=1595852711 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(-453, 1404)
 
-[node name="TargetObject85" parent="." unique_id=2034362818 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject85" parent="." unique_id=2034362818 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(-639, 1569)
 
-[node name="TargetObject86" parent="." unique_id=1091793423 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject86" parent="." unique_id=1091793423 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(-453, 1566)
 
-[node name="TargetObject87" parent="." unique_id=301876609 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject87" parent="." unique_id=301876609 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(288, 1399)
 
-[node name="TargetObject88" parent="." unique_id=257880400 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject88" parent="." unique_id=257880400 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(474, 1401)
 
-[node name="TargetObject89" parent="." unique_id=1831536464 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject89" parent="." unique_id=1831536464 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(663, 1401)
 
-[node name="TargetObject90" parent="." unique_id=1325577127 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject90" parent="." unique_id=1325577127 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(291, 1572)
 
-[node name="TargetObject91" parent="." unique_id=1536627786 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject91" parent="." unique_id=1536627786 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(477, 1566)
 
-[node name="TargetObject92" parent="." unique_id=86095448 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject92" parent="." unique_id=86095448 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(663, 1563)
 
-[node name="TargetObject93" parent="." unique_id=1707489886 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject93" parent="." unique_id=1707489886 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(-273, 1399)
 
-[node name="TargetObject94" parent="." unique_id=2057795350 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject94" parent="." unique_id=2057795350 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(-87, 1401)
 
-[node name="TargetObject95" parent="." unique_id=765059954 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject95" parent="." unique_id=765059954 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(102, 1401)
 
-[node name="TargetObject96" parent="." unique_id=354503221 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject96" parent="." unique_id=354503221 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(-270, 1572)
 
-[node name="TargetObject97" parent="." unique_id=1117146556 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject97" parent="." unique_id=1117146556 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(-84, 1566)
 
-[node name="TargetObject98" parent="." unique_id=2065347400 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject98" parent="." unique_id=2065347400 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(102, 1563)
 
-[node name="TargetObject100" parent="." unique_id=2114431810 groups=["target_objects"] instance=ExtResource("2_nj2yk")]
+[node name="TargetObject100" parent="." unique_id=2114431810 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(852, 1401)
 
 [node name="CanvasLayer_UI" type="CanvasLayer" parent="." unique_id=719591420]
@@ -394,19 +394,23 @@ color = Color(1, 0, 0, 1)
 position = Vector2(2, 808)
 zoom = Vector2(0.3, 0.3)
 
-[node name="WaterStation_Object" parent="." unique_id=1159901913 instance=ExtResource("3_7pswh")]
+[node name="WaterStation_Object" parent="." unique_id=1159901913 groups=["water_station"] instance=ExtResource("3_7pswh")]
 position = Vector2(-837, 67)
 
-[node name="WaterStation_Object2" parent="." unique_id=924834437 instance=ExtResource("3_7pswh")]
+[node name="WaterStation_Object2" parent="." unique_id=924834437 groups=["water_station"] instance=ExtResource("3_7pswh")]
 position = Vector2(845, 63)
 
-[node name="WaterStation_Object3" parent="." unique_id=2054469194 instance=ExtResource("3_7pswh")]
+[node name="WaterStation_Object3" parent="." unique_id=2054469194 groups=["water_station"] instance=ExtResource("3_7pswh")]
 position = Vector2(-829, 1569)
 
-[node name="WaterStation_Object4" parent="." unique_id=1811819077 instance=ExtResource("3_7pswh")]
+[node name="WaterStation_Object4" parent="." unique_id=1811819077 groups=["water_station"] instance=ExtResource("3_7pswh")]
 position = Vector2(853, 1565)
 
 [node name="GameManager" type="Node" parent="." unique_id=963429042 groups=["game_manager"]]
 script = ExtResource("4_nj2yk")
 
+[connection signal="pressed" from="CanvasLayer_UI/Control/Button" to="NPC" method="_on_button_pressed"]
+[connection signal="pressed" from="CanvasLayer_UI/Control/Button" to="NPC2" method="_on_button_pressed"]
+[connection signal="pressed" from="CanvasLayer_UI/Control/Button" to="NPC3" method="_on_button_pressed"]
+[connection signal="pressed" from="CanvasLayer_UI/Control/Button" to="NPC4" method="_on_button_pressed"]
 [connection signal="pressed" from="CanvasLayer_UI/Control/Button" to="GameManager" method="_on_button_pressed"]

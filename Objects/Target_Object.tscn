@@ -1,11 +1,13 @@
 [gd_scene format=3 uid="uid://dtgqvyth3474k"]
 
+[ext_resource type="Script" uid="uid://chjn24wf8ui7a" path="res://Objects/target_object.gd" id="1_8rnsv"]
 [ext_resource type="Texture2D" uid="uid://b40x31dl3fa2i" path="res://Assets/icon-tree.png" id="1_d02yx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r6br0"]
 size = Vector2(109, 106)
 
 [node name="TargetObject" type="Node2D" unique_id=1159901913]
+script = ExtResource("1_8rnsv")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=617195242]
 texture = ExtResource("1_d02yx")
