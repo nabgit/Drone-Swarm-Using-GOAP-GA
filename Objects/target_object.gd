@@ -3,7 +3,12 @@ extends Node2D
 @export var is_on_fire: bool = false:
 	set(value):
 		is_on_fire = value
+		if is_on_fire:
+			burn_timer = 0.0
 		update_sprite()
+
+## Seconds this tree has been burning continuously.
+var burn_timer: float = 0.0
 
 var tree_tex = preload("res://Assets/icon-tree.png")
 var burning_tex = preload("res://Assets/icon-burning.png")
@@ -12,6 +17,10 @@ var burning_tex = preload("res://Assets/icon-burning.png")
 
 func _ready():
 	update_sprite()
+
+func _process(delta):
+	if is_on_fire:
+		burn_timer += delta
 
 func update_sprite():
 	if not sprite: return # Safety check for initialization
