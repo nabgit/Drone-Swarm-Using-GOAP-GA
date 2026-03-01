@@ -1,17 +1,21 @@
 extends Node
 
-const ROUND_DURATION := 45.0
+const ROUND_DURATION_TICKS := 600  # 10 minutes max per round
 const NUM_FIRES_PER_ROUND := 4
-const NUM_GENERATIONS := 10
+const NUM_GENERATIONS := 100
+const TICK_INTERVAL := 1.0  # 1 second per tick
 
 var generation := 0
-var round_timer := 0.0
+var tick_count := 0
+var tick_accumulator := 0.0
 var round_active := false
+var drones_deployed := false
 
 var drones: Array = []
-var drone_start_positions: Array = []
+var drone_home_stations: Array = []  # Nearest water station per drone
 
 @onready var timer_label = $"../CanvasLayer_UI/Control/Label-Timer"
+@onready var grid_manager: GridManager = $"../GridManager"
 
 # Seed parents for generation 0.
 var alpha_parent := {
@@ -26,15 +30,29 @@ var beta_parent := {
 
 func _ready():
 	drones = get_tree().get_nodes_in_group("drones")
+	var water_stations = get_tree().get_nodes_in_group("water_station")
+	var forests = get_tree().get_nodes_in_group("forest")
+
+	# Initialize the grid from scene nodes.
+	grid_manager.initialize(forests, water_stations)
+
+	# Assign each drone to its nearest water station as home base.
 	for drone in drones:
-		drone_start_positions.append(drone.global_position)
+		var best_ws = null
+		var best_dist := INF
+		for ws in water_stations:
+			var d = drone.global_position.distance_to(ws.global_position)
+			if d < best_dist:
+				best_dist = d
+				best_ws = ws
+		drone_home_stations.append(best_ws)
 
 
 func start_simulation():
 	if round_active:
 		return
 	generation = 0
-	print("=== Starting evolutionary run (%d generations, %.0fs rounds) ===" % [NUM_GENERATIONS, ROUND_DURATION])
+	print("=== Starting evolutionary run (%d generations, %d tick rounds) ===" % [NUM_GENERATIONS, ROUND_DURATION_TICKS])
 	_start_generation_zero()
 
 
@@ -47,13 +65,17 @@ func _begin_round(weight_sets: Array):
 	_reset_world()
 	_ignite_fires()
 
+	# Place drones at home water stations and initialize GOAP, but do NOT start yet.
 	for i in range(drones.size()):
+		var home_ws = drone_home_stations[i]
+		drones[i].global_position = home_ws.global_position
 		drones[i].reset_for_round()
 		drones[i].initialize_goap(weight_sets[i])
-		drones[i].start_simulation()
 
-	round_timer = 0.0
+	tick_count = 0
+	tick_accumulator = 0.0
 	round_active = true
+	drones_deployed = false
 	print("--- Generation %d started ---" % generation)
 
 
@@ -61,17 +83,61 @@ func _process(delta):
 	if not round_active:
 		return
 
-	round_timer += delta
+	tick_accumulator += delta
 
-	# End the round when all fires are out or time runs out.
-	var all_out := true
-	for f in get_tree().get_nodes_in_group("forest"):
-		if f.get("is_on_fire"):
-			all_out = false
-			break
+	# Execute discrete ticks.
+	while tick_accumulator >= TICK_INTERVAL:
+		tick_accumulator -= TICK_INTERVAL
+		_execute_tick()
+		if not round_active:
+			return
 
-	if all_out or round_timer >= ROUND_DURATION:
+	# Between ticks: interpolate drone positions for smooth visuals.
+	if drones_deployed:
+		var fraction := tick_accumulator / TICK_INTERVAL
+		for drone in drones:
+			if drone.has_method("interpolate_position"):
+				drone.interpolate_position(fraction)
+
+
+func _execute_tick():
+	tick_count += 1
+
+	# Update timer display.
+	timer_label.text = "Time: " + str(tick_count)
+
+	# 1) Tick fire spread and death.
+	grid_manager.tick_fire()
+
+	# 2) Check deployment threshold — deploy drones once 10% is burning.
+	if not drones_deployed and grid_manager.should_deploy_drones():
+		_deploy_drones()
+
+	# 3) Tick all active drones.
+	if drones_deployed:
+		for drone in drones:
+			if drone.has_method("tick"):
+				drone.tick()
+
+	# 4) Tick cooperative extinguishing on burning cells.
+	for cell in grid_manager.get_burning_cells():
+		if cell.has_method("tick_extinguish"):
+			cell.tick_extinguish()
+
+	# 5) Check round end: all fires out (and no burning) or timeout.
+	var burning = grid_manager.get_burning_cells()
+	if burning.is_empty() and drones_deployed:
 		_end_round()
+	elif tick_count >= ROUND_DURATION_TICKS:
+		_end_round()
+
+
+func _deploy_drones():
+	drones_deployed = true
+	for drone in drones:
+		drone.has_water = true
+		drone.start_simulation()
+	print("  Drones deployed at tick %d" % tick_count)
 
 
 func _end_round():
@@ -104,14 +170,13 @@ func _end_round():
 
 
 func _reset_world():
-	# Return drones to starting positions.
-	for i in range(drones.size()):
-		drones[i].global_position = drone_start_positions[i]
+	# Reset all forest cells via GridManager.
+	grid_manager.reset()
 
-	# Extinguish all fires and reset burn timers.
-	for f in get_tree().get_nodes_in_group("forest"):
-		f.is_on_fire = false
-		f.burn_timer = 0.0
+	# Return drones to home water stations.
+	for i in range(drones.size()):
+		var home_ws = drone_home_stations[i]
+		drones[i].global_position = home_ws.global_position
 
 
 func _ignite_fires():
