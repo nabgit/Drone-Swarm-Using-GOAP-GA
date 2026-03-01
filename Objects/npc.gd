@@ -60,10 +60,13 @@ func enter_state(new_state):
 	match current_state:
 		State.GO_TO_LOCATION:
 			var plan = goap.get_next_plan(has_water, self)
+			if plan.is_empty() or plan.get("target") == null:
+				update_npc_status(npc_index, "Idle (no target)")
+				return
 			current_target_object = plan["target"]
 			current_action_name = plan["action"]
 			action_data = plan["data"]
-			
+
 			update_npc_status(npc_index, "Moving to: " + current_target_object.name)
 			
 		State.PERFORM_ACTION:

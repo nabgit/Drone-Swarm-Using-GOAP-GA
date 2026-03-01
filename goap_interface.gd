@@ -47,7 +47,11 @@ func get_next_plan(npc_has_water: bool, npc_node: Node2D) -> Dictionary:
 		potential_actions.append({"action": "refill_furthest", "target": get_furthest_in_group(npc_node, "water_station")})
 
 	if potential_actions.is_empty():
-		return {}
+		# Nothing useful to do — idle at nearest water station.
+		var fallback_target = get_nearest_in_group(npc_node, "water_station")
+		if fallback_target:
+			return {"target": fallback_target, "action": "refill_nearest", "data": []}
+		return {"target": null, "action": "idle", "data": []}
 
 	return select_weighted_action(potential_actions)
 
@@ -88,4 +92,4 @@ func select_weighted_action(actions: Array) -> Dictionary:
 		if roll <= cursor:
 			return {"target": a.target, "action": a.action, "data": []}
 	
-	return actions[0]
+	return {"target": actions[0].target, "action": actions[0].action, "data": []}
