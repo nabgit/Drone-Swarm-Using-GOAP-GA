@@ -39,6 +39,8 @@ func initialize_goap(custom_weights: Dictionary):
 	if goap != null:
 		goap.queue_free()
 	goap = GOAPInterface.new(custom_weights)
+	if grid_manager:
+		goap.set_grid_manager(grid_manager)
 	add_child(goap)
 
 

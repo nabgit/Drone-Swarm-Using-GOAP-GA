@@ -36,6 +36,10 @@ func _ready():
 	# Initialize the grid from scene nodes.
 	grid_manager.initialize(forests, water_stations)
 
+	# Give each drone a reference to the grid manager.
+	for drone in drones:
+		drone.grid_manager = grid_manager
+
 	# Assign each drone to its nearest water station as home base.
 	for drone in drones:
 		var best_ws = null
