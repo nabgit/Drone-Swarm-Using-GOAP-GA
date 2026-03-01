@@ -5,6 +5,9 @@ const NUM_FIRES_PER_ROUND := 4
 const NUM_GENERATIONS := 100
 const TICK_INTERVAL := 1.0  # 1 second per tick
 
+## Set > 1 to fast-forward (e.g. 50 = 50x speed). Set to 0 for uncapped (run as fast as possible).
+const SIMULATION_SPEED := 1.0  # 1 = real-time, >1 = fast-forward, 0 = uncapped
+
 var generation := 0
 var tick_count := 0
 var tick_accumulator := 0.0
@@ -15,7 +18,7 @@ var drones: Array = []
 var drone_home_stations: Array = []  # Nearest water station per drone
 
 @onready var timer_label = $"../CanvasLayer_UI/Control/Label-Timer"
-@onready var grid_manager: GridManager = $"../GridManager"
+@onready var grid_manager = $"../GridManager"
 
 # Seed parents for generation 0.
 var alpha_parent := {
@@ -87,12 +90,16 @@ func _process(delta):
 	if not round_active:
 		return
 
-	tick_accumulator += delta
+	var scaled_delta: float = delta * SIMULATION_SPEED if SIMULATION_SPEED > 0 else delta * 1000.0
+	tick_accumulator += scaled_delta
 
-	# Execute discrete ticks.
-	while tick_accumulator >= TICK_INTERVAL:
+	# Execute discrete ticks (cap per frame to avoid freezing).
+	var ticks_this_frame := 0
+	var max_ticks_per_frame := 10000
+	while tick_accumulator >= TICK_INTERVAL and ticks_this_frame < max_ticks_per_frame:
 		tick_accumulator -= TICK_INTERVAL
 		_execute_tick()
+		ticks_this_frame += 1
 		if not round_active:
 			return
 
@@ -117,16 +124,17 @@ func _execute_tick():
 	if not drones_deployed and grid_manager.should_deploy_drones():
 		_deploy_drones()
 
-	# 3) Tick all active drones.
+	# 3) Tick cooperative extinguishing on burning cells (before drone ticks,
+	#    so drones that finish this tick still contribute their last increment).
+	for cell in grid_manager.get_burning_cells():
+		if cell.has_method("tick_extinguish"):
+			cell.tick_extinguish()
+
+	# 4) Tick all active drones.
 	if drones_deployed:
 		for drone in drones:
 			if drone.has_method("tick"):
 				drone.tick()
-
-	# 4) Tick cooperative extinguishing on burning cells.
-	for cell in grid_manager.get_burning_cells():
-		if cell.has_method("tick_extinguish"):
-			cell.tick_extinguish()
 
 	# 5) Check round end: all fires out (and no burning) or timeout.
 	var burning = grid_manager.get_burning_cells()
@@ -160,6 +168,16 @@ func _end_round():
 			"fitness": fitness,
 		})
 
+	# Detailed round stats.
+	var alive = grid_manager.get_forest_alive_count()
+	var burning = grid_manager.get_burning_cells().size()
+	var dead = grid_manager.total_forest - alive
+	var total_fires_ext := 0
+	for drone in drones:
+		total_fires_ext += drone.fires_extinguished
+	print("  Round ended at tick %d | Alive: %d/%d | Dead: %d | Still burning: %d | Fires extinguished: %d" % [
+		tick_count, alive, grid_manager.total_forest, dead, burning, total_fires_ext])
+
 	GeneticAlgorithm.log_generation_stats(generation, population)
 	generation += 1
 
@@ -169,7 +187,7 @@ func _end_round():
 
 	# Evolve the next generation and start the next round after a brief pause.
 	var next_weights = GeneticAlgorithm.evolve_from_population(population, drones.size())
-	await get_tree().create_timer(1.5).timeout
+	await get_tree().create_timer(0.05).timeout
 	_begin_round(next_weights)
 
 

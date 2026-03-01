@@ -11,7 +11,7 @@ var goap: GOAPInterface = null
 var grid_manager: GridManager = null
 
 # Grid movement
-var grid_pos := Vector2i(-1, -1)
+var grid_coord := Vector2i(-1, -1)
 var move_path: Array[Vector2i] = []
 
 # Visual interpolation between grid cells
@@ -46,9 +46,9 @@ func initialize_goap(custom_weights: Dictionary):
 
 func start_simulation():
 	simulation_started = true
-	# Snap grid_pos from current world position.
+	# Snap grid_coord from current world position.
 	if grid_manager:
-		grid_pos = grid_manager.world_to_grid(global_position)
+		grid_coord = grid_manager.world_to_grid(global_position)
 		visual_from = global_position
 		visual_to = global_position
 	_enter_idle()
@@ -137,10 +137,10 @@ func _plan_next_action():
 
 	# Get path from grid_manager.
 	var target_grid: Vector2i = current_target_object.grid_coord
-	move_path = grid_manager.find_path(grid_pos, target_grid)
+	move_path = grid_manager.find_path(grid_coord, target_grid)
 
 	# Remove the first element (current position).
-	if not move_path.is_empty() and move_path[0] == grid_pos:
+	if not move_path.is_empty() and move_path[0] == grid_coord:
 		move_path.remove_at(0)
 
 	if move_path.is_empty():
@@ -168,9 +168,9 @@ func _tick_move():
 	var next_cell: Vector2i = move_path[0]
 	move_path.remove_at(0)
 
-	visual_from = grid_manager.grid_to_world(grid_pos)
-	grid_pos = next_cell
-	visual_to = grid_manager.grid_to_world(grid_pos)
+	visual_from = grid_manager.grid_to_world(grid_coord)
+	grid_coord = next_cell
+	visual_to = grid_manager.grid_to_world(grid_coord)
 
 	# If path exhausted, we've arrived.
 	if move_path.is_empty():
@@ -183,7 +183,7 @@ func _arrive_at_target():
 		return
 
 	# Snap to target world position.
-	visual_from = grid_manager.grid_to_world(grid_pos)
+	visual_from = grid_manager.grid_to_world(grid_coord)
 	visual_to = visual_from
 
 	if current_action_name.begins_with("extinguish") or current_action_name == "assist_drone":
