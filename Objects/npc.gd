@@ -1,19 +1,32 @@
 extends Node2D
 
 @export var npc_index: int = 1
-@export var movement_speed: float = 200.0
 
-enum State { GO_TO_LOCATION, PERFORM_ACTION }
-var current_state = State.GO_TO_LOCATION
+enum State { IDLE, MOVING, EXTINGUISHING, REFILLING }
+var current_state = State.IDLE
 
-var simulation_started = false
-var timer = 0
+var simulation_started := false
+var has_water := false
+var goap: GOAPInterface = null
+var grid_manager: GridManager = null
 
+# Grid movement
+var grid_pos := Vector2i(-1, -1)
+var move_path: Array[Vector2i] = []
+
+# Visual interpolation between grid cells
+var visual_from := Vector2.ZERO
+var visual_to := Vector2.ZERO
+
+# Action countdown (20 ticks for extinguish/refill)
+var action_ticks_remaining := 0
 var current_target_object = null
-var current_action_name = ""
-var action_data = []
+var current_action_name := ""
 
-@onready var timer_label = $"../CanvasLayer_UI/Control/Label-Timer"
+# Fitness metrics
+var fires_extinguished: int = 0
+var total_burn_time_reduced: float = 0.0
+
 @onready var npc_labels = [
 	$"../CanvasLayer_UI/Control/Label-NPC_Status",
 	$"../CanvasLayer_UI/Control/Label-NPC_Status2",
@@ -21,133 +34,211 @@ var action_data = []
 	$"../CanvasLayer_UI/Control/Label-NPC_Status4"
 ]
 
-var has_water = false
-var goap: GOAPInterface = null
-
-# --- Fitness metrics (PR 2) -----------------------------------------------
-var fires_extinguished: int = 0
-var total_burn_time_reduced: float = 0.0
-
-#func _ready():
 
 func initialize_goap(custom_weights: Dictionary):
-	# Remove old GOAP child if re-initializing between generations.
 	if goap != null:
 		goap.queue_free()
 	goap = GOAPInterface.new(custom_weights)
 	add_child(goap)
 
+
 func start_simulation():
 	simulation_started = true
-	enter_state(State.GO_TO_LOCATION)
+	# Snap grid_pos from current world position.
+	if grid_manager:
+		grid_pos = grid_manager.world_to_grid(global_position)
+		visual_from = global_position
+		visual_to = global_position
+	_enter_idle()
+
 
 func stop_simulation():
 	simulation_started = false
+	# Unregister from any target we were extinguishing.
+	if current_state == State.EXTINGUISHING and current_target_object:
+		current_target_object.extinguisher_count -= 1
 	current_target_object = null
 	current_action_name = ""
-	action_data = []
+	current_state = State.IDLE
 
-## Return this drone's weight dictionary (for building population entries).
+
 func get_weights() -> Dictionary:
 	if goap:
 		return goap.weights.duplicate()
 	return {}
 
-## Gather metrics used by GeneticAlgorithm.compute_fitness().
+
 func get_metrics() -> Dictionary:
-	var forests = get_tree().get_nodes_in_group("forest")
 	var alive = 0
-	for f in forests:
-		if not f.get("is_on_fire"):
-			alive += 1
+	if grid_manager:
+		alive = grid_manager.get_forest_alive_count()
+	else:
+		for f in get_tree().get_nodes_in_group("forest"):
+			if not f.get("is_on_fire") and not f.get("is_dead"):
+				alive += 1
 	return {
 		"fires_extinguished": fires_extinguished,
 		"total_burn_time_reduced": total_burn_time_reduced,
 		"forest_alive_at_end": alive,
 	}
 
-## Reset drone state for a new generation round.
+
 func reset_for_round():
 	simulation_started = false
 	has_water = false
 	current_target_object = null
 	current_action_name = ""
-	action_data = []
-	timer = 0
+	move_path = []
+	action_ticks_remaining = 0
+	current_state = State.IDLE
 	fires_extinguished = 0
 	total_burn_time_reduced = 0.0
 
-func _process(delta):
-	if simulation_started:
-		if npc_index == 1:
-			timer += delta
-			timer_label.text = "Time: " + str(int(timer))
 
-		if current_state == State.GO_TO_LOCATION and current_target_object:
-			var distance = global_position.distance_to(current_target_object.global_position)
-
-			if distance > 5.0:
-				var direction = global_position.direction_to(current_target_object.global_position)
-				global_position += direction * movement_speed * delta
-			else:
-				global_position = current_target_object.global_position
-				enter_state(State.PERFORM_ACTION)
-
-
-func enter_state(new_state):
-	if goap == null:
-		print("Drone ", npc_index, " waiting for GOAP initialization...")
+func tick():
+	if not simulation_started:
 		return
 
-	current_state = new_state
 	match current_state:
-		State.GO_TO_LOCATION:
-			var plan = goap.get_next_plan(has_water, self)
-			if plan.is_empty() or plan.get("target") == null:
-				update_npc_status(npc_index, "Idle (no target)")
-				return
-			current_target_object = plan["target"]
-			current_action_name = plan["action"]
-			action_data = plan["data"]
+		State.IDLE:
+			_plan_next_action()
+		State.MOVING:
+			_tick_move()
+		State.EXTINGUISHING:
+			_tick_extinguish()
+		State.REFILLING:
+			_tick_refill()
 
-			update_npc_status(npc_index, "Moving to: " + current_target_object.name)
 
-		State.PERFORM_ACTION:
-			update_npc_status(npc_index, "Performing: " + current_action_name)
-			_handle_action()
+func interpolate_position(fraction: float):
+	global_position = visual_from.lerp(visual_to, clampf(fraction, 0.0, 1.0))
 
-func _handle_action():
-	var target = current_target_object
-	if target == null:
-		enter_state(State.GO_TO_LOCATION)
+
+# --- State transitions ---
+
+func _enter_idle():
+	current_state = State.IDLE
+	update_npc_status(npc_index, "Idle")
+
+
+func _plan_next_action():
+	if goap == null:
 		return
 
-	# Snapshot burn timer before the action (for burn-time-reduced credit).
-	var burn_before: float = 0.0
-	if current_action_name.begins_with("extinguish") and target.has_method("_process"):
-		burn_before = target.get("burn_timer") if target.get("burn_timer") != null else 0.0
+	var plan = goap.get_next_plan(has_water, self)
+	if plan.is_empty() or plan.get("target") == null:
+		update_npc_status(npc_index, "Idle (no target)")
+		return
 
-	var success = await target.animate_smart_object(current_action_name, action_data)
-	current_target_object = null
+	current_target_object = plan["target"]
+	current_action_name = plan["action"]
 
-	if success:
-		if current_action_name.begins_with("extinguish") or current_action_name == "assist_drone":
-			has_water = false
-			if current_action_name.begins_with("extinguish"):
-				fires_extinguished += 1
-				# Credit = how quickly the drone responded.
-				# Lower burn_before means faster response → more credit.
-				# Use action duration (2s) + burn_before as reference so credit is always positive.
-				total_burn_time_reduced += max(10.0 - burn_before, 0.0)
-		elif current_action_name.begins_with("refill"):
-			has_water = true
+	# Get path from grid_manager.
+	var target_grid: Vector2i = current_target_object.grid_coord
+	move_path = grid_manager.find_path(grid_pos, target_grid)
 
-	await get_tree().process_frame
-	enter_state(State.GO_TO_LOCATION)
+	# Remove the first element (current position).
+	if not move_path.is_empty() and move_path[0] == grid_pos:
+		move_path.remove_at(0)
+
+	if move_path.is_empty():
+		# Already at target — go straight to action.
+		_arrive_at_target()
+	else:
+		current_state = State.MOVING
+		update_npc_status(npc_index, "Moving to: " + current_target_object.name)
+
+
+func _tick_move():
+	# Re-plan if target fire went out during movement.
+	if current_target_object and current_action_name.begins_with("extinguish"):
+		if not current_target_object.get("is_on_fire"):
+			current_target_object = null
+			move_path = []
+			_enter_idle()
+			return
+
+	if move_path.is_empty():
+		_arrive_at_target()
+		return
+
+	# Move one cell per tick.
+	var next_cell: Vector2i = move_path[0]
+	move_path.remove_at(0)
+
+	visual_from = grid_manager.grid_to_world(grid_pos)
+	grid_pos = next_cell
+	visual_to = grid_manager.grid_to_world(grid_pos)
+
+	# If path exhausted, we've arrived.
+	if move_path.is_empty():
+		_arrive_at_target()
+
+
+func _arrive_at_target():
+	if current_target_object == null:
+		_enter_idle()
+		return
+
+	# Snap to target world position.
+	visual_from = grid_manager.grid_to_world(grid_pos)
+	visual_to = visual_from
+
+	if current_action_name.begins_with("extinguish") or current_action_name == "assist_drone":
+		# Check fire is still burning.
+		if not current_target_object.get("is_on_fire"):
+			current_target_object = null
+			_enter_idle()
+			return
+
+		# Register as extinguisher for cooperative mechanic.
+		current_target_object.extinguisher_count += 1
+		action_ticks_remaining = 20
+		current_state = State.EXTINGUISHING
+		# Snapshot burn timer for fitness credit.
+		total_burn_time_reduced += max(100.0 - current_target_object.burn_timer, 0.0)
+		update_npc_status(npc_index, "Extinguishing: " + current_target_object.name)
+
+	elif current_action_name.begins_with("refill"):
+		action_ticks_remaining = 20
+		current_state = State.REFILLING
+		update_npc_status(npc_index, "Refilling")
+
+	else:
+		_enter_idle()
+
+
+func _tick_extinguish():
+	# Re-plan if fire went out (cooperatively extinguished by others).
+	if current_target_object == null or not current_target_object.get("is_on_fire"):
+		if current_target_object:
+			current_target_object.extinguisher_count -= 1
+			fires_extinguished += 1
+		current_target_object = null
+		has_water = false
+		_enter_idle()
+		return
+
+	action_ticks_remaining -= 1
+
+	if action_ticks_remaining <= 0:
+		# Time's up — unregister and move on.
+		current_target_object.extinguisher_count -= 1
+		fires_extinguished += 1
+		has_water = false
+		current_target_object = null
+		_enter_idle()
+
+
+func _tick_refill():
+	action_ticks_remaining -= 1
+
+	if action_ticks_remaining <= 0:
+		has_water = true
+		current_target_object = null
+		_enter_idle()
+
 
 func update_npc_status(index, text):
 	if index > 0 and index <= npc_labels.size():
-		npc_labels[index-1].text = "Drone " + str(index) + ": " + text
-
-func _on_button_pressed() -> void:
-	start_simulation()
+		npc_labels[index - 1].text = "Drone " + str(index) + ": " + text
