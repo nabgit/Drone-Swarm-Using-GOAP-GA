@@ -69,7 +69,7 @@ static func compute_fitness(metrics: Dictionary) -> float:
 	var fires: float = metrics.get("fires_extinguished", 0.0)
 	var burn: float  = metrics.get("total_burn_time_reduced", 0.0)
 	var alive: float = metrics.get("forest_alive_at_end", 0.0)
-	return fires * 10.0 + burn * 0.5 + alive * 1.0
+	return fires * 10.0 + burn * 0.1 + alive * 2.0
 
 
 ## Print per-drone fitness, weights, and generation summary.
