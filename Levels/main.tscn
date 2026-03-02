@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dtgqvyth3474k" path="res://Objects/Target_Object.tscn" id="2_nj2yk"]
 [ext_resource type="PackedScene" uid="uid://ddnbn1s56dc8s" path="res://Objects/WaterStation_Object.tscn" id="3_7pswh"]
 [ext_resource type="Script" uid="uid://cg62cm04o2f60" path="res://game_manager.gd" id="4_nj2yk"]
+[ext_resource type="Script" path="res://grid_manager.gd" id="5_grid"]
 
 [node name="Main" type="Node2D" unique_id=1322690549]
 
@@ -61,19 +62,15 @@ position = Vector2(651, 228)
 
 [node name="TargetObject7" parent="." unique_id=1691152873 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(-285, 64)
-is_on_fire = true
 
 [node name="TargetObject8" parent="." unique_id=196933188 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(-99, 66)
-is_on_fire = true
 
 [node name="TargetObject9" parent="." unique_id=434895236 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(90, 66)
-is_on_fire = true
 
 [node name="TargetObject10" parent="." unique_id=1351684446 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(-282, 237)
-is_on_fire = true
 
 [node name="TargetObject11" parent="." unique_id=577762836 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(-96, 231)
@@ -410,11 +407,10 @@ position = Vector2(-829, 1569)
 [node name="WaterStation_Object4" parent="." unique_id=1811819077 groups=["water_station"] instance=ExtResource("3_7pswh")]
 position = Vector2(853, 1565)
 
+[node name="GridManager" type="Node" parent="."]
+script = ExtResource("5_grid")
+
 [node name="GameManager" type="Node" parent="." unique_id=963429042 groups=["game_manager"]]
 script = ExtResource("4_nj2yk")
 
-[connection signal="pressed" from="CanvasLayer_UI/Control/Button" to="NPC" method="_on_button_pressed"]
-[connection signal="pressed" from="CanvasLayer_UI/Control/Button" to="NPC2" method="_on_button_pressed"]
-[connection signal="pressed" from="CanvasLayer_UI/Control/Button" to="NPC3" method="_on_button_pressed"]
-[connection signal="pressed" from="CanvasLayer_UI/Control/Button" to="NPC4" method="_on_button_pressed"]
 [connection signal="pressed" from="CanvasLayer_UI/Control/Button" to="GameManager" method="_on_button_pressed"]
