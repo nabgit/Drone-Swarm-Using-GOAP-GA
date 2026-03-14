@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dtgqvyth3474k" path="res://Objects/Target_Object.tscn" id="2_nj2yk"]
 [ext_resource type="PackedScene" uid="uid://ddnbn1s56dc8s" path="res://Objects/WaterStation_Object.tscn" id="3_7pswh"]
 [ext_resource type="Script" uid="uid://cg62cm04o2f60" path="res://game_manager.gd" id="4_nj2yk"]
-[ext_resource type="Script" path="res://grid_manager.gd" id="5_grid"]
+[ext_resource type="Script" uid="uid://du5g2pyxtd35h" path="res://grid_manager.gd" id="5_grid"]
 
 [node name="Main" type="Node2D" unique_id=1322690549]
 
@@ -26,6 +26,26 @@ npc_index = 3
 z_index = 1
 position = Vector2(1004, 1707)
 npc_index = 4
+
+[node name="NPC5" parent="." unique_id=484682933 groups=["drones"] instance=ExtResource("1_lwy2l")]
+z_index = 1
+position = Vector2(-992, -84)
+npc_index = 5
+
+[node name="NPC6" parent="." unique_id=792878085 groups=["drones"] instance=ExtResource("1_lwy2l")]
+z_index = 1
+position = Vector2(975, -67)
+npc_index = 6
+
+[node name="NPC7" parent="." unique_id=269119530 groups=["drones"] instance=ExtResource("1_lwy2l")]
+z_index = 1
+position = Vector2(-963, 1690)
+npc_index = 7
+
+[node name="NPC8" parent="." unique_id=1886970865 groups=["drones"] instance=ExtResource("1_lwy2l")]
+z_index = 1
+position = Vector2(1004, 1707)
+npc_index = 8
 
 [node name="TargetObject2" parent="." unique_id=1897643849 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(-654, 69)
@@ -385,6 +405,42 @@ offset_bottom = 659.0
 theme_override_font_sizes/font_size = 50
 text = "DRONE 4 - OFFLINE"
 
+[node name="Label-NPC_Status5" type="Label" parent="CanvasLayer_UI/Control" unique_id=1465363640]
+layout_mode = 0
+offset_left = 67.0
+offset_top = 663.0
+offset_right = 528.0
+offset_bottom = 732.0
+theme_override_font_sizes/font_size = 50
+text = "DRONE 5 - OFFLINE"
+
+[node name="Label-NPC_Status6" type="Label" parent="CanvasLayer_UI/Control" unique_id=680920445]
+layout_mode = 0
+offset_left = 67.0
+offset_top = 740.0
+offset_right = 528.0
+offset_bottom = 809.0
+theme_override_font_sizes/font_size = 50
+text = "DRONE 6 - OFFLINE"
+
+[node name="Label-NPC_Status7" type="Label" parent="CanvasLayer_UI/Control" unique_id=1161040596]
+layout_mode = 0
+offset_left = 71.0
+offset_top = 816.0
+offset_right = 532.0
+offset_bottom = 885.0
+theme_override_font_sizes/font_size = 50
+text = "DRONE 7 - OFFLINE"
+
+[node name="Label-NPC_Status8" type="Label" parent="CanvasLayer_UI/Control" unique_id=76746377]
+layout_mode = 0
+offset_left = 75.0
+offset_top = 891.0
+offset_right = 536.0
+offset_bottom = 960.0
+theme_override_font_sizes/font_size = 50
+text = "DRONE 8 - OFFLINE"
+
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer_UI/Control" unique_id=1252051349]
 layout_mode = 0
 offset_right = 40.0
@@ -407,7 +463,7 @@ position = Vector2(-829, 1569)
 [node name="WaterStation_Object4" parent="." unique_id=1811819077 groups=["water_station"] instance=ExtResource("3_7pswh")]
 position = Vector2(853, 1565)
 
-[node name="GridManager" type="Node" parent="."]
+[node name="GridManager" type="Node" parent="." unique_id=1891393101]
 script = ExtResource("5_grid")
 
 [node name="GameManager" type="Node" parent="." unique_id=963429042 groups=["game_manager"]]

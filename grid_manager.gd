@@ -3,7 +3,7 @@ extends Node
 
 const GRID_SIZE := 10
 const BURN_DEATH_TIME := 100
-const SPREAD_CHECK_INTERVAL := 10
+const SPREAD_CHECK_INTERVAL := 20
 const DEPLOYMENT_THRESHOLD := 0.10
 
 # cells[col][row] holds the scene node at that grid position.

@@ -6,7 +6,7 @@ const NUM_GENERATIONS := 100
 const TICK_INTERVAL := 1.0  # 1 second per tick
 
 ## Set > 1 to fast-forward (e.g. 50 = 50x speed). Set to 0 for uncapped (run as fast as possible).
-const SIMULATION_SPEED := 1.0  # 1 = real-time, >1 = fast-forward, 0 = uncapped
+const SIMULATION_SPEED := 100.0  # 1 = real-time, >1 = fast-forward, 0 = uncapped
 
 var generation := 0
 var tick_count := 0
