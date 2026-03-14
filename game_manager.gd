@@ -6,7 +6,7 @@ const NUM_GENERATIONS := 100
 const TICK_INTERVAL := 1.0  # 1 second per tick
 
 ## Set > 1 to fast-forward (e.g. 50 = 50x speed). Set to 0 for uncapped (run as fast as possible).
-const SIMULATION_SPEED := 100.0  # 1 = real-time, >1 = fast-forward, 0 = uncapped
+const SIMULATION_SPEED := 1.0  # 1 = real-time, >1 = fast-forward, 0 = uncapped
 
 var generation := 0
 var tick_count := 0
@@ -16,6 +16,9 @@ var drones_deployed := false
 
 var drones: Array = []
 var drone_home_stations: Array = []  # Nearest water station per drone
+
+var best_alive := -1
+var best_population := []
 
 @onready var timer_label = $"../CanvasLayer_UI/Control/Label-Timer"
 @onready var grid_manager = $"../GridManager"
@@ -59,6 +62,8 @@ func start_simulation():
 	if round_active:
 		return
 	generation = 0
+	best_alive = -1
+	best_population = []
 	print("=== Starting evolutionary run (%d generations, %d tick rounds) ===" % [NUM_GENERATIONS, ROUND_DURATION_TICKS])
 	_start_generation_zero()
 
@@ -179,14 +184,32 @@ func _end_round():
 		tick_count, alive, grid_manager.total_forest, dead, burning, total_fires_ext])
 
 	GeneticAlgorithm.log_generation_stats(generation, population)
-	generation += 1
+	var accepted := false
 
+	# --- Elitism Backstop ---
+	if alive > best_alive:
+		if alive > 75: # Do not allow elitism to bias results too much. We don't want one "lucky round" to make a false positive
+			alive = 75
+		best_alive = alive
+		best_population = population.duplicate(true)
+		accepted = true
+		print("  Generation accepted (alive improved to %d)" % alive)
+	else:
+		print("  Generation rejected (alive %d <= best %d)" % [alive, best_alive])
+	
+	generation += 1
+	
 	if generation >= NUM_GENERATIONS:
 		print("=== Evolution complete after %d generations ===" % NUM_GENERATIONS)
 		return
-
-	# Evolve the next generation and start the next round after a brief pause.
-	var next_weights = GeneticAlgorithm.evolve_from_population(population, drones.size())
+	
+	var next_weights
+	
+	if accepted:
+		next_weights = GeneticAlgorithm.evolve_from_population(population, drones.size())
+	else:
+		next_weights = GeneticAlgorithm.evolve_from_population(best_population, drones.size())
+	
 	await get_tree().create_timer(0.05).timeout
 	_begin_round(next_weights)
 

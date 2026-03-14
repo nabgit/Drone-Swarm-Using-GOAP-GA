@@ -47,6 +47,26 @@ z_index = 1
 position = Vector2(1004, 1707)
 npc_index = 8
 
+[node name="NPC9" parent="." unique_id=1769807863 groups=["drones"] instance=ExtResource("1_lwy2l")]
+z_index = 1
+position = Vector2(-992, -84)
+npc_index = 9
+
+[node name="NPC10" parent="." unique_id=469461128 groups=["drones"] instance=ExtResource("1_lwy2l")]
+z_index = 1
+position = Vector2(975, -67)
+npc_index = 10
+
+[node name="NPC11" parent="." unique_id=1873533547 groups=["drones"] instance=ExtResource("1_lwy2l")]
+z_index = 1
+position = Vector2(-963, 1690)
+npc_index = 11
+
+[node name="NPC12" parent="." unique_id=1512744146 groups=["drones"] instance=ExtResource("1_lwy2l")]
+z_index = 1
+position = Vector2(1004, 1707)
+npc_index = 12
+
 [node name="TargetObject2" parent="." unique_id=1897643849 groups=["forest"] instance=ExtResource("2_nj2yk")]
 position = Vector2(-654, 69)
 
