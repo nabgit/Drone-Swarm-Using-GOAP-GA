@@ -7,6 +7,10 @@ const TICK_INTERVAL := 1.0  # 1 second per tick
 
 ## Set > 1 to fast-forward (e.g. 50 = 50x speed). Set to 0 for uncapped (run as fast as possible).
 const SIMULATION_SPEED := 1.0  # 1 = real-time, >1 = fast-forward, 0 = uncapped
+const USE_GENETIC_ALGORITHM := true # True enables genetic learning, False disables learning
+
+var log_file : FileAccess
+var log_path := "user://simulation_log.csv" # On linux systems, data will be stored within ~/.local/share/godot/app_userdata/Genetic-GOAP_Project/simulation_log.csv
 
 var generation := 0
 var tick_count := 0
@@ -33,6 +37,11 @@ var beta_parent := {
 	"assist_drone": 0.3, "refill_nearest": 2.0, "refill_furthest": 0.2
 }
 
+func _init_logger():
+	log_file = FileAccess.open(log_path, FileAccess.WRITE)
+	if log_file:
+		# Write CSV header
+		log_file.store_line("generation,tick,alive,dead,burning,fires_extinguished")
 
 func _ready():
 	drones = get_tree().get_nodes_in_group("drones")
@@ -57,10 +66,17 @@ func _ready():
 				best_ws = ws
 		drone_home_stations.append(best_ws)
 
+func log_csv(line: String):
+	print(line)  # still prints to console
+	if log_file:
+		log_file.store_line(line)
 
 func start_simulation():
 	if round_active:
 		return
+	
+	_init_logger()
+	
 	generation = 0
 	best_alive = -1
 	best_population = []
@@ -69,7 +85,14 @@ func start_simulation():
 
 
 func _start_generation_zero():
-	var weight_sets = GeneticAlgorithm.evolve(alpha_parent, beta_parent, drones.size())
+	var weight_sets
+	
+	if USE_GENETIC_ALGORITHM:
+		weight_sets = GeneticAlgorithm.evolve(alpha_parent, beta_parent, drones.size())
+	else:
+		weight_sets = []
+		for i in range(drones.size()):
+			weight_sets.append(alpha_parent.duplicate(true))
 	_begin_round(weight_sets)
 
 
@@ -180,6 +203,18 @@ func _end_round():
 	var total_fires_ext := 0
 	for drone in drones:
 		total_fires_ext += drone.fires_extinguished
+	
+	var csv_line = "%d,%d,%d,%d,%d,%d" % [
+		generation,
+		tick_count,
+		alive,
+		dead,
+		burning,
+		total_fires_ext
+	]
+	
+	log_csv(csv_line)
+	
 	print("  Round ended at tick %d | Alive: %d/%d | Dead: %d | Still burning: %d | Fires extinguished: %d" % [
 		tick_count, alive, grid_manager.total_forest, dead, burning, total_fires_ext])
 
@@ -201,14 +236,21 @@ func _end_round():
 	
 	if generation >= NUM_GENERATIONS:
 		print("=== Evolution complete after %d generations ===" % NUM_GENERATIONS)
+		if log_file:
+			log_file.close()
 		return
 	
 	var next_weights
 	
-	if accepted:
-		next_weights = GeneticAlgorithm.evolve_from_population(population, drones.size())
+	if USE_GENETIC_ALGORITHM:
+		if accepted:
+			next_weights = GeneticAlgorithm.evolve_from_population(population, drones.size())
+		else:
+			next_weights = GeneticAlgorithm.evolve_from_population(best_population, drones.size())
 	else:
-		next_weights = GeneticAlgorithm.evolve_from_population(best_population, drones.size())
+		next_weights = []
+		for i in range(drones.size()):
+			next_weights.append(alpha_parent.duplicate(true))
 	
 	await get_tree().create_timer(0.05).timeout
 	_begin_round(next_weights)
