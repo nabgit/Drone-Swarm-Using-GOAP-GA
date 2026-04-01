@@ -461,6 +461,42 @@ offset_bottom = 960.0
 theme_override_font_sizes/font_size = 50
 text = "DRONE 8 - OFFLINE"
 
+[node name="Label-NPC_Status9" type="Label" parent="CanvasLayer_UI/Control" unique_id=70468645]
+layout_mode = 0
+offset_left = 71.0
+offset_top = 968.0
+offset_right = 532.0
+offset_bottom = 1037.0
+theme_override_font_sizes/font_size = 50
+text = "DRONE 9 - OFFLINE"
+
+[node name="Label-NPC_Status10" type="Label" parent="CanvasLayer_UI/Control" unique_id=1450646604]
+layout_mode = 0
+offset_left = 71.0
+offset_top = 1045.0
+offset_right = 532.0
+offset_bottom = 1114.0
+theme_override_font_sizes/font_size = 50
+text = "DRONE 10 - OFFLINE"
+
+[node name="Label-NPC_Status11" type="Label" parent="CanvasLayer_UI/Control" unique_id=1414045390]
+layout_mode = 0
+offset_left = 75.0
+offset_top = 1121.0
+offset_right = 536.0
+offset_bottom = 1190.0
+theme_override_font_sizes/font_size = 50
+text = "DRONE 11 - OFFLINE"
+
+[node name="Label-NPC_Status12" type="Label" parent="CanvasLayer_UI/Control" unique_id=1880336685]
+layout_mode = 0
+offset_left = 79.0
+offset_top = 1196.0
+offset_right = 540.0
+offset_bottom = 1265.0
+theme_override_font_sizes/font_size = 50
+text = "DRONE 12 - OFFLINE"
+
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer_UI/Control" unique_id=1252051349]
 layout_mode = 0
 offset_right = 40.0
