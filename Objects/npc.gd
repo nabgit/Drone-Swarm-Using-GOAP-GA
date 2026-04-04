@@ -31,7 +31,15 @@ var total_burn_time_reduced: float = 0.0
 	$"../CanvasLayer_UI/Control/Label-NPC_Status",
 	$"../CanvasLayer_UI/Control/Label-NPC_Status2",
 	$"../CanvasLayer_UI/Control/Label-NPC_Status3",
-	$"../CanvasLayer_UI/Control/Label-NPC_Status4"
+	$"../CanvasLayer_UI/Control/Label-NPC_Status4",
+	$"../CanvasLayer_UI/Control/Label-NPC_Status5",
+	$"../CanvasLayer_UI/Control/Label-NPC_Status6",
+	$"../CanvasLayer_UI/Control/Label-NPC_Status7",
+	$"../CanvasLayer_UI/Control/Label-NPC_Status8",
+	$"../CanvasLayer_UI/Control/Label-NPC_Status9",
+	$"../CanvasLayer_UI/Control/Label-NPC_Status10",
+	$"../CanvasLayer_UI/Control/Label-NPC_Status11",
+	$"../CanvasLayer_UI/Control/Label-NPC_Status12"
 ]
 
 
