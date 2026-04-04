@@ -16,7 +16,7 @@ const DEFAULT_DISCARD_FRACTION := 0.25
 static func evolve(
 	parent_a: Dictionary,
 	parent_b: Dictionary,
-	count: int = 8,
+	count: int = 12,
 	mutation_rate: float = DEFAULT_MUTATION_RATE,
 	mutation_magnitude: float = DEFAULT_MUTATION_MAGNITUDE
 ) -> Array[Dictionary]:

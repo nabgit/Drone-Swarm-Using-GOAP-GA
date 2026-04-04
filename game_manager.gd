@@ -6,7 +6,11 @@ const NUM_GENERATIONS := 100
 const TICK_INTERVAL := 1.0  # 1 second per tick
 
 ## Set > 1 to fast-forward (e.g. 50 = 50x speed). Set to 0 for uncapped (run as fast as possible).
-const SIMULATION_SPEED := 100.0  # 1 = real-time, >1 = fast-forward, 0 = uncapped
+const SIMULATION_SPEED := 1.0  # 1 = real-time, >1 = fast-forward, 0 = uncapped
+const USE_GENETIC_ALGORITHM := true # True enables genetic learning, False disables learning
+
+var log_file : FileAccess
+var log_path := "user://simulation_log.csv" # On linux systems, data will be stored within ~/.local/share/godot/app_userdata/Genetic-GOAP_Project/simulation_log.csv
 
 var generation := 0
 var tick_count := 0
@@ -16,6 +20,9 @@ var drones_deployed := false
 
 var drones: Array = []
 var drone_home_stations: Array = []  # Nearest water station per drone
+
+var best_alive := -1
+var best_population := []
 
 @onready var timer_label = $"../CanvasLayer_UI/Control/Label-Timer"
 @onready var grid_manager = $"../GridManager"
@@ -30,6 +37,11 @@ var beta_parent := {
 	"assist_drone": 0.3, "refill_nearest": 2.0, "refill_furthest": 0.2
 }
 
+func _init_logger():
+	log_file = FileAccess.open(log_path, FileAccess.WRITE)
+	if log_file:
+		# Write CSV header
+		log_file.store_line("generation,tick,alive,dead,burning,fires_extinguished")
 
 func _ready():
 	drones = get_tree().get_nodes_in_group("drones")
@@ -54,17 +66,33 @@ func _ready():
 				best_ws = ws
 		drone_home_stations.append(best_ws)
 
+func log_csv(line: String):
+	print(line)  # still prints to console
+	if log_file:
+		log_file.store_line(line)
 
 func start_simulation():
 	if round_active:
 		return
+	
+	_init_logger()
+	
 	generation = 0
+	best_alive = -1
+	best_population = []
 	print("=== Starting evolutionary run (%d generations, %d tick rounds) ===" % [NUM_GENERATIONS, ROUND_DURATION_TICKS])
 	_start_generation_zero()
 
 
 func _start_generation_zero():
-	var weight_sets = GeneticAlgorithm.evolve(alpha_parent, beta_parent, drones.size())
+	var weight_sets
+	
+	if USE_GENETIC_ALGORITHM:
+		weight_sets = GeneticAlgorithm.evolve(alpha_parent, beta_parent, drones.size())
+	else:
+		weight_sets = []
+		for i in range(drones.size()):
+			weight_sets.append(alpha_parent.duplicate(true))
 	_begin_round(weight_sets)
 
 
@@ -175,18 +203,55 @@ func _end_round():
 	var total_fires_ext := 0
 	for drone in drones:
 		total_fires_ext += drone.fires_extinguished
+	
+	var csv_line = "%d,%d,%d,%d,%d,%d" % [
+		generation,
+		tick_count,
+		alive,
+		dead,
+		burning,
+		total_fires_ext
+	]
+	
+	log_csv(csv_line)
+	
 	print("  Round ended at tick %d | Alive: %d/%d | Dead: %d | Still burning: %d | Fires extinguished: %d" % [
 		tick_count, alive, grid_manager.total_forest, dead, burning, total_fires_ext])
 
 	GeneticAlgorithm.log_generation_stats(generation, population)
-	generation += 1
+	var accepted := false
 
+	# --- Elitism Backstop ---
+	if alive > best_alive:
+		if alive > 75: # Do not allow elitism to bias results too much. We don't want one "lucky round" to make a false positive
+			alive = 75
+		best_alive = alive
+		best_population = population.duplicate(true)
+		accepted = true
+		print("  Generation accepted (alive improved to %d)" % alive)
+	else:
+		print("  Generation rejected (alive %d <= best %d)" % [alive, best_alive])
+	
+	generation += 1
+	
 	if generation >= NUM_GENERATIONS:
 		print("=== Evolution complete after %d generations ===" % NUM_GENERATIONS)
+		if log_file:
+			log_file.close()
 		return
-
-	# Evolve the next generation and start the next round after a brief pause.
-	var next_weights = GeneticAlgorithm.evolve_from_population(population, drones.size())
+	
+	var next_weights
+	
+	if USE_GENETIC_ALGORITHM:
+		if accepted:
+			next_weights = GeneticAlgorithm.evolve_from_population(population, drones.size())
+		else:
+			next_weights = GeneticAlgorithm.evolve_from_population(best_population, drones.size())
+	else:
+		next_weights = []
+		for i in range(drones.size()):
+			next_weights.append(alpha_parent.duplicate(true))
+	
 	await get_tree().create_timer(0.05).timeout
 	_begin_round(next_weights)
 
