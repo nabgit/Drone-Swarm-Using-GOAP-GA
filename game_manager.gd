@@ -223,7 +223,7 @@ func _end_round():
 
 	# --- Elitism Backstop ---
 	if alive > best_alive:
-		if alive > 75: # Do not allow elitism to bias results too much. We don't want one "lucky round" to make a false positive
+		if alive > 75: # Do not allow elitism to bias results too much. One "lucky round" should not make a false positive
 			alive = 75
 		best_alive = alive
 		best_population = population.duplicate(true)
