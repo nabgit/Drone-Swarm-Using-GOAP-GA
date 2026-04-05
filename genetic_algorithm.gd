@@ -12,7 +12,6 @@ const DEFAULT_DISCARD_FRACTION := 0.25
 # --- Public API -----------------------------------------------------------
 
 ## Generation 0: crossover + mutate from two seed parents.
-## Preserves existing call signature — new params are optional.
 static func evolve(
 	parent_a: Dictionary,
 	parent_b: Dictionary,
