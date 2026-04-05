@@ -1,4 +1,4 @@
-# ECE-554 Project
+# ECE-554 Project - Genetic Algorithm-GOAP Game AI
 **Date:** April 5, 2026
 ## Project Overview
 This project presents the implementation of a hybrid artificial intelligence architecture that integrates Goal-Oriented Action Planning (GOAP) with a genetic learning algorithm to enable adaptive, experience-driven decision making. Traditional GOAP systems are widely used in real-time applications such as video games due to their efficiency and transparency; however, they typically rely on static or random goal-selection mechanisms, limiting their ability to improve over time. To address this limitation, this work replaces fixed goal selection with a genetically optimized, probability-weighted strategy that evolves based on agent performance.
