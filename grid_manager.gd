@@ -20,10 +20,10 @@ func initialize(forests: Array, water_stations: Array) -> void:
 	var max_x := -INF
 	var max_y := -INF
 	for ws in water_stations:
-		min_x = minf(min_x, ws.position.x)
-		min_y = minf(min_y, ws.position.y)
-		max_x = maxf(max_x, ws.position.x)
-		max_y = maxf(max_y, ws.position.y)
+		min_x = minf(min_x, ws.global_position.x)
+		min_y = minf(min_y, ws.global_position.y)
+		max_x = maxf(max_x, ws.global_position.x)
+		max_y = maxf(max_y, ws.global_position.y)
 
 	grid_origin = Vector2(min_x, min_y)
 	cell_size = Vector2(
@@ -43,7 +43,7 @@ func initialize(forests: Array, water_stations: Array) -> void:
 	all_nodes.append_array(water_stations)
 
 	for node in all_nodes:
-		var gp := world_to_grid(node.position)
+		var gp := world_to_grid(node.global_position)
 		gp.x = clampi(gp.x, 0, GRID_SIZE - 1)
 		gp.y = clampi(gp.y, 0, GRID_SIZE - 1)
 		cells[gp.x][gp.y] = node
@@ -53,6 +53,10 @@ func initialize(forests: Array, water_stations: Array) -> void:
 	print("GridManager: Initialized %dx%d grid. Origin=%s, CellSize=%s, Forests=%d" % [
 		GRID_SIZE, GRID_SIZE, grid_origin, cell_size, total_forest])
 
+func get_cell_at(coord: Vector2i):
+	if coord.x < 0 or coord.x >= GRID_SIZE or coord.y < 0 or coord.y >= GRID_SIZE:
+		return null
+	return cells[coord.x][coord.y]
 
 func world_to_grid(pos: Vector2) -> Vector2i:
 	return Vector2i(
@@ -70,7 +74,10 @@ func grid_to_world(grid_pos: Vector2i) -> Vector2:
 
 func get_adjacent_cells(cell: Vector2i) -> Array[Vector2i]:
 	var neighbors: Array[Vector2i] = []
-	var offsets: Array[Vector2i] = [Vector2i(0, -1), Vector2i(0, 1), Vector2i(-1, 0), Vector2i(1, 0)]
+	var offsets: Array[Vector2i] = [
+		Vector2i(0, -1), Vector2i(0, 1), Vector2i(-1, 0), Vector2i(1, 0),
+		Vector2i(-1, -1), Vector2i(1, -1), Vector2i(-1, 1), Vector2i(1, 1)
+	]
 	for offset in offsets:
 		var n: Vector2i = cell + offset
 		if n.x >= 0 and n.x < GRID_SIZE and n.y >= 0 and n.y < GRID_SIZE:
