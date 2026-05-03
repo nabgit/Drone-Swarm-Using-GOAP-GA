@@ -1,9 +1,20 @@
 # ECE-554 Project - Genetic Algorithm-GOAP Game AI
 **Date:** April 5, 2026
+
+This project was completed for ECE-554 at the University of Michigan.
+
+**Live demo:** https://ece554.nqazi.com
+
 ## Project Overview
 This project presents the implementation of a hybrid artificial intelligence architecture that integrates Goal-Oriented Action Planning (GOAP) with a genetic learning algorithm to enable adaptive, experience-driven decision making. Traditional GOAP systems are widely used in real-time applications such as video games due to their efficiency and transparency; however, they typically rely on static or random goal-selection mechanisms, limiting their ability to improve over time. To address this limitation, this work replaces fixed goal selection with a genetically optimized, probability-weighted strategy that evolves based on agent performance.
 
 The system is implemented within a real-time cooperative wildfire suppression simulation, where multiple drone agents operate on a grid-based environment. Each agent uses GOAP to generate action plans while selecting high-level goals (such as targeting specific fires or assisting other agents) based on evolving genetic parameters. After each simulation round, agents are evaluated using performance metrics including fires extinguished, forest area preserved, and response efficiency. Lower-performing agents are removed, and new agents are generated through crossover and mutation of successful strategies, enabling continuous improvement across generations.
+
+## Results: GOAP vs. GOAP + GA
+Comparing the baseline GOAP-only configuration against the hybrid GOAP + Genetic Algorithm configuration, the GA layer produced clear gains in both performance and consistency:
+
+- On average, rounds were completed in **12.54% less time**, with **9.27% more trees saved**.
+- Beyond raw efficiency, we noted a significant increase in consistency. Variability decreased by **8.6%** for completion time and roughly **24.5%** for both trees saved and round success rates.
 
 ## Installing Godot 4 Engine
 Godot 4 is a free, open-source, cross-platform game engine that runs on Windows, macOS, and Linux.
@@ -85,3 +96,6 @@ This will launch the main scene and run the project.
 ## Notes
 - Godot projects are portable and require no additional installation beyond the engine executable  
 - Ensure you are using Godot 4.x, as earlier versions may not be compatible
+
+## Future Work
+A natural next step is to compare this GOAP + Genetic Algorithm approach against a Reinforcement Learning baseline, evaluating both performance and consistency on the same wildfire suppression task.
